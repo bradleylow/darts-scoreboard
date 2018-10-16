@@ -1,0 +1,40 @@
+button {
+    &:focus{ outline: none; }
+}// button
+
+.button {
+    display: inline-block;
+    min-width: 106px;
+    padding: 10px 15px;
+    font-family: $font-main;
+    @include font-size(1.8);
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    color: $color-black;
+    cursor: pointer;
+    @include transition-style;
+
+    &.button--green {
+        background-color: $color-green;
+        color: $color-white;
+    }//.button--green
+
+}//.button
+
+.options__button {
+    @extend .button;
+    min-width: 60px;
+    padding: 7px 12px;
+    color: $color-green;
+    border: 3px solid $color-green;
+    margin-right: 15px;
+
+    input[type="radio"] { display: none; }
+
+    &.selected {
+        color: $color-white;
+        background-color: $color-green;
+    }//&.selected
+
+}//.options__button

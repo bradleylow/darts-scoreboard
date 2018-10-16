@@ -182,7 +182,7 @@ html {
   overflow-x: hidden; }
 
 body {
-  font-family: "Raleway", sans-serif; }
+  font-family: "Montserrat", sans-serif; }
   body * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
@@ -200,43 +200,43 @@ textarea {
   color: #000; }
 
 h1 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 36px;
   font-size: 3.6rem; }
 
 h2 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 32px;
   font-size: 3.2rem; }
 
 h3 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 28px;
   font-size: 2.8rem; }
 
 h4 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 24px;
   font-size: 2.4rem; }
 
 h5 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 20px;
   font-size: 2rem; }
 
 p {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 300;
   font-size: 18px;
   font-size: 1.8rem; }
 
 a {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 300;
   text-decoration: none;
   color: inherit; }
@@ -244,6 +244,42 @@ a {
     color: inherit; }
 
 span {
-  font-family: "Raleway", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: inherit;
   color: inherit; }
+
+button:focus {
+  outline: none; }
+
+.button, .options__button {
+  display: inline-block;
+  min-width: 106px;
+  padding: 10px 15px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  color: #000;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+  .button.button--green, .button--green.options__button {
+    background-color: #0E7D48;
+    color: #fff; }
+
+.options__button {
+  min-width: 60px;
+  padding: 7px 12px;
+  color: #0E7D48;
+  border: 3px solid #0E7D48;
+  margin-right: 15px; }
+  .options__button input[type="radio"] {
+    display: none; }
+  .options__button.selected {
+    color: #fff;
+    background-color: #0E7D48; }
