@@ -7,7 +7,7 @@ class Layout extends Component {
     render () {
         return (
             <Aux>
-                <main className="container mx-auto">
+                <main className="container mx-auto px-8 lg:px-0">
                     {this.props.children}
                 </main>
             </Aux>
