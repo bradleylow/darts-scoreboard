@@ -1,14 +1,17 @@
 import * as actions from '../actions/actions';
-import updateObject from '../utility';
+import { updateObject } from '../utility';
 
 const initialState = {
     players: [],
-    score: null,
+    scoreCount: null,
     isAuth: false
 }
 
 const startGame = (state, action) => {
-
+    return updateObject(state, {
+        players: action.players,
+        scoreCount: action.scoreCount
+    });
 }
 
 const reducer = (state = initialState, action) => {

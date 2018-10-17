@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import RadioButton from './../../components/UI/Form/RadioButton/RadioButton';
 
+import * as actions from '../../store/actions/index';
+
 class Options extends Component {
 
     state = {
@@ -23,7 +25,7 @@ class Options extends Component {
     }
 
     startGameHandler = () => {
-        console.log(this.state);
+        this.props.startGame(this.state);
     }
 
     render () {
@@ -102,7 +104,9 @@ class Options extends Component {
 
 
 const mapDispatchToProps = dispatch => {
-    
+    return {
+        startGame: (options) => dispatch(actions.startGame(options))
+    };
 }
 
 export default connect(null, mapDispatchToProps)(Options);
