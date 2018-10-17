@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import RadioButton from './../../components/UI/Form/RadioButton/RadioButton';
 
@@ -6,7 +7,7 @@ class Options extends Component {
 
     state = {
         players: 1,
-        scoreCount: '301'
+        scoreCount: '501'
     }
 
     updatePlayerListHandler = (e) => {
@@ -99,4 +100,9 @@ class Options extends Component {
     }
 }
 
-export default Options;
+
+const mapDispatchToProps = dispatch => {
+    
+}
+
+export default connect(null, mapDispatchToProps)(Options);
