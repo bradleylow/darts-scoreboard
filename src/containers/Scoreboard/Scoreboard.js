@@ -16,11 +16,15 @@ class Scoreboard extends Component {
             {id: 2, name: "Player 3", color: "green", score: 501, ppd: 0},
             {id: 3, name: "Player 4", color: "red", score: 501, ppd: 0}
         ],
-        currentPlayer: 0,
         currentRound: {
+            player: 0,
             scores: [],
             total: 0,
             scoreType: 1,
+        },
+        lastRound: {
+            player: null,
+            total: 0
         }
     }
 
@@ -45,7 +49,7 @@ class Scoreboard extends Component {
         //         <Redirect to="/" />
         //     );
         // }
-        let currentPlayer = this.state.players[this.state.currentPlayer];
+        let currentPlayer = this.state.players[this.state.currentRound.player];
 
         let opponentScores = null;
 
@@ -117,10 +121,13 @@ class Scoreboard extends Component {
                     <div className="input__actions px-4">
                         <div className="button__wrapper flex flex-wrap -mx-6">
                             <div className="input__action w-1/3 px-2">
-                                <button className="button button--red w-full">Clear</button>
+                                <button className="button button--orange w-full">Clear</button>
                             </div>
-                            <div className="input__action w-2/3 px-2">
-                                <button className="button button--green w-full">Enter Score</button>
+                            <div className="input__action w-1/3 px-2">
+                                <button className="button button--red w-full">Back</button>
+                            </div>
+                            <div className="input__action w-1/3 px-2">
+                                <button className="button button--green w-full">Next</button>
                             </div>
                         </div>
                     </div>
