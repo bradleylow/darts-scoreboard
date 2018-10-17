@@ -11,14 +11,14 @@ button {
     font-weight: 600;
     line-height: 1;
     text-align: center;
-    color: $color-black;
+    color: $color-white;
     cursor: pointer;
     @include transition-style;
 
-    &.button--green {
-        background-color: $color-green;
-        color: $color-white;
-    }//.button--green
+    &.button--blue { background-color: $color-blue; }
+    &.button--green { background-color: $color-green; }
+    &.button--orange { background-color: $color-orange; }
+    &.button--red { background-color: $color-red; }
 
 }//.button
 
@@ -26,15 +26,15 @@ button {
     @extend .button;
     min-width: 60px;
     padding: 7px 12px;
-    color: $color-green;
-    border: 3px solid $color-green;
+    color: $color-blue;
+    border: 3px solid $color-blue;
     margin-right: 15px;
 
     input[type="radio"] { display: none; }
 
     &.selected {
         color: $color-white;
-        background-color: $color-green;
+        background-color: $color-blue;
     }//&.selected
 
 }//.options__button

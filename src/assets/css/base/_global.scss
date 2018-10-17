@@ -6,6 +6,7 @@ html {
 
 body {
     font-family: $font-main;
+	background-color: $color-dark-gray;
 
     *{ -webkit-tap-highlight-color: rgba(0,0,0,0); }
 }
@@ -17,3 +18,5 @@ body {
 }//*
 
 *:focus{ outline: none; }
+
+main { position: relative; }

@@ -182,7 +182,8 @@ html {
   overflow-x: hidden; }
 
 body {
-  font-family: "Montserrat", sans-serif; }
+  font-family: "Montserrat", sans-serif;
+  background-color: #262626; }
   body * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
@@ -194,10 +195,13 @@ body {
 *:focus {
   outline: none; }
 
+main {
+  position: relative; }
+
 body,
 input,
 textarea {
-  color: #000; }
+  color: #fff; }
 
 h1 {
   font-family: "Montserrat", sans-serif;
@@ -261,25 +265,30 @@ button:focus {
   font-weight: 600;
   line-height: 1;
   text-align: center;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease; }
+  .button.button--blue, .button--blue.options__button {
+    background-color: #15A3FF; }
   .button.button--green, .button--green.options__button {
-    background-color: #0E7D48;
-    color: #fff; }
+    background-color: #3CCC05; }
+  .button.button--orange, .button--orange.options__button {
+    background-color: #FFC400; }
+  .button.button--red, .button--red.options__button {
+    background-color: #FF4B36; }
 
 .options__button {
   min-width: 60px;
   padding: 7px 12px;
-  color: #0E7D48;
-  border: 3px solid #0E7D48;
+  color: #15A3FF;
+  border: 3px solid #15A3FF;
   margin-right: 15px; }
   .options__button input[type="radio"] {
     display: none; }
   .options__button.selected {
     color: #fff;
-    background-color: #0E7D48; }
+    background-color: #15A3FF; }

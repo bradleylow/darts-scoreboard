@@ -27,7 +27,7 @@ class Options extends Component {
 
     render () {
         return (
-            <div className="options-container text-center">
+            <div className="options-container py-24 text-center">
                 <h1>Darts 01 Game</h1>
                 <div className="options__players mb-12">
                     <h5 className="mb-4">Select Number of Players:</h5>
@@ -91,8 +91,8 @@ class Options extends Component {
                         </form>
                     </div>
                 </div>
-                <div className="options__action-container my-12">
-                    <button className="button button--green" onClick={this.startGameHandler}>Start Game</button>
+                <div className="options__action-container my-16">
+                    <button className="button button--blue" onClick={this.startGameHandler}>Start Game</button>
                 </div>
             </div>
         );
