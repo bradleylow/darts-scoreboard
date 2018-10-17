@@ -19,4 +19,8 @@ body {
 
 *:focus{ outline: none; }
 
-main { position: relative; }
+main {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+}

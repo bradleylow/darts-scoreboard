@@ -196,7 +196,9 @@ body {
   outline: none; }
 
 main {
-  position: relative; }
+  position: relative;
+  width: 100%;
+  height: 100vh; }
 
 body,
 input,
@@ -292,3 +294,14 @@ button:focus {
   .options__button.selected {
     color: #fff;
     background-color: #15A3FF; }
+
+.options-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
