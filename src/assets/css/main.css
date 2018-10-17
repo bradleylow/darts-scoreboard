@@ -200,6 +200,12 @@ main {
   width: 100%;
   height: 100vh; }
 
+.contain {
+  width: 100%; }
+  @media only screen and (min-width: 576px) {
+    .contain {
+      max-width: 550px; } }
+
 body,
 input,
 textarea {
@@ -305,3 +311,116 @@ button:focus {
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
+
+.scoreboard-container {
+  width: 100%; }
+  @media only screen and (min-width: 576px) {
+    .scoreboard-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -moz-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); } }
+
+.scoreboard__display .score-to p {
+  font-size: 14px;
+  font-size: 1.4rem; }
+
+.scoreboard__player .scoreboard__score {
+  font-size: 50px;
+  font-size: 5rem;
+  margin: 15px 0; }
+  .scoreboard__player .scoreboard__score--blue {
+    background-color: #15A3FF; }
+  .scoreboard__player .scoreboard__score--orange {
+    background-color: #FFC400; }
+  .scoreboard__player .scoreboard__score--green {
+    background-color: #3CCC05; }
+  .scoreboard__player .scoreboard__score--red {
+    background-color: #FF4B36; }
+
+.scoreboard__player p {
+  font-size: 14px;
+  font-size: 1.4rem; }
+
+.scoreboard__opponents .scoreboard__opponent {
+  width: 100%;
+  max-width: 33.33%;
+  padding: 8px 15px;
+  margin-right: 10px;
+  text-align: center; }
+  .scoreboard__opponents .scoreboard__opponent:last-of-type {
+    margin-right: 0; }
+  .scoreboard__opponents .scoreboard__opponent--blue {
+    background-color: #15A3FF; }
+  .scoreboard__opponents .scoreboard__opponent--orange {
+    background-color: #FFC400; }
+  .scoreboard__opponents .scoreboard__opponent--green {
+    background-color: #3CCC05; }
+  .scoreboard__opponents .scoreboard__opponent--red {
+    background-color: #FF4B36; }
+
+.round__container .round__scores {
+  min-height: 33px; }
+
+.round__container .round__score {
+  min-width: 100px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1); }
+  .round__container .round__score:last-of-type {
+    margin-right: 0; }
+
+.scoreboard__input button {
+  min-width: 0;
+  font-weight: 500;
+  font-size: 16px;
+  font-size: 1.6rem; }
+
+.scoreboard__input .input__score-type button {
+  width: 50%;
+  padding: 7px 12px;
+  margin-right: 10px;
+  border: 3px solid transparent; }
+  .scoreboard__input .input__score-type button:last-of-type {
+    margin-right: 0; }
+
+.scoreboard__input--blue .input__score-type button {
+  background-color: transparent;
+  border-color: #15A3FF; }
+  .scoreboard__input--blue .input__score-type button.active {
+    background-color: #15A3FF; }
+
+.scoreboard__input--blue .input__numbers button {
+  background-color: #15A3FF; }
+
+.scoreboard__input--orange .input__score-type button {
+  background-color: transparent;
+  border-color: #FFC400; }
+  .scoreboard__input--orange .input__score-type button.active {
+    background-color: #FFC400; }
+
+.scoreboard__input--orange .input__numbers button {
+  background-color: #FFC400; }
+
+.scoreboard__input--green .input__score-type button {
+  background-color: transparent;
+  border-color: #3CCC05; }
+  .scoreboard__input--green .input__score-type button.active {
+    background-color: #3CCC05; }
+
+.scoreboard__input--green .input__numbers button {
+  background-color: #3CCC05; }
+
+.scoreboard__input--red .input__score-type button {
+  background-color: transparent;
+  border-color: #FF4B36; }
+  .scoreboard__input--red .input__score-type button.active {
+    background-color: #FF4B36; }
+
+.scoreboard__input--red .input__numbers button {
+  background-color: #FF4B36; }

@@ -9,7 +9,7 @@ class Options extends Component {
 
     state = {
         players: 1,
-        scoreCount: '501'
+        scoreCount: 501
     }
 
     componentDidMount () {
@@ -23,7 +23,7 @@ class Options extends Component {
     }
 
     updateScoreCountHandler = (e) => {
-        let scoreCount = e.target.value;
+        let scoreCount = parseInt(e.target.value);
 
         this.setState({ scoreCount: scoreCount })
     }
@@ -73,25 +73,25 @@ class Options extends Component {
                     <div className="options__select">
                         <form onChange={(e) => {this.updateScoreCountHandler(e)}}>
                             <RadioButton
-                                classList={'options__button ' + (this.state.scoreCount === '301' ? 'selected' : '')}
+                                classList={'options__button ' + (this.state.scoreCount === 301 ? 'selected' : '')}
                                 label="301"
                                 name="players"
                                 value="301"
                             />
                             <RadioButton
-                                classList={'options__button ' + (this.state.scoreCount === '501' ? 'selected' : '')}
+                                classList={'options__button ' + (this.state.scoreCount === 501 ? 'selected' : '')}
                                 label="501"
                                 name="players"
                                 value="501"
                             />
                             <RadioButton
-                                classList={'options__button ' + (this.state.scoreCount === '701' ? 'selected' : '')}
+                                classList={'options__button ' + (this.state.scoreCount === 701 ? 'selected' : '')}
                                 label="701"
                                 name="players"
                                 value="701"
                             />
                             <RadioButton
-                                classList={'options__button ' + (this.state.scoreCount === '901' ? 'selected' : '')}
+                                classList={'options__button ' + (this.state.scoreCount === 901 ? 'selected' : '')}
                                 label="901"
                                 name="players"
                                 value="901"

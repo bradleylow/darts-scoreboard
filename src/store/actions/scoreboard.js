@@ -32,7 +32,10 @@ export const startGame = (options) => {
     for (let i = 0; i < options.players; i++) {
         let newPlayer = playerBank[i];
 
+        newPlayer.id = i;
         newPlayer.score = options.scoreCount;
+        newPlayer.ppd = 0;
+
         players.push(newPlayer);
     }
 

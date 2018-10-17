@@ -1,0 +1,160 @@
+.scoreboard-container {
+    width: 100%;
+
+    @include media((min-width: $media-sm)) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include translate(-50%, -50%);
+    }
+
+}
+
+.scoreboard__display .score-to p {
+    @include font-size(1.4);
+}
+
+.scoreboard__player {
+
+    .scoreboard__score {
+        @include font-size(5)
+        margin: 15px 0;
+
+        &--blue { background-color: $color-blue; }
+        &--orange { background-color: $color-orange; }
+        &--green { background-color: $color-green; }
+        &--red { background-color: $color-red; }
+    }
+
+    p { @include font-size(1.4); }
+
+}//.scoreboard__player
+
+.scoreboard__opponents {
+
+    .scoreboard__opponent {
+        width: 100%;
+        max-width: 33.33%;
+        padding: 8px 15px;
+        margin-right: 10px;
+        text-align: center;
+
+        &:last-of-type { margin-right: 0; }
+
+        &--blue { background-color: $color-blue; }
+        &--orange { background-color: $color-orange; }
+        &--green { background-color: $color-green; }
+        &--red { background-color: $color-red; }
+
+    }//.scoreboard__opponent
+
+}//.scoreboard__opponents
+
+.round__container {
+
+    .round__scores {
+        min-height: 33px;
+    }//.round__scores
+
+    .round__score {
+        min-width: 100px;
+        padding: 5px 10px;
+        margin-right: 10px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.1);
+
+        &:last-of-type { margin-right: 0; }
+    }//.round__score
+
+}// .round__container
+
+.scoreboard__input {
+
+    button {
+        min-width: 0;
+        font-weight: 500;
+        @include font-size(1.6);
+    }//button
+
+    .input__score-type {
+
+        button{
+            width: 50%;
+            padding: 7px 12px;
+            margin-right: 10px;
+            border: 3px solid transparent;
+
+            &:last-of-type { margin-right: 0; }
+        }
+
+    }//.input__score-type
+
+    &--blue {
+
+        .input__score-type {
+
+            button {
+                background-color: transparent;
+                border-color: $color-blue;
+
+                &.active { background-color: $color-blue; }
+            }//button
+
+        }//.input__score-type
+
+        .input__numbers button { background-color: $color-blue; }
+
+    }//&--blue
+
+    &--orange {
+
+        .input__score-type {
+
+            button {
+                background-color: transparent;
+                border-color: $color-orange;
+
+                &.active { background-color: $color-orange; }
+            }//button
+
+        }//.input__score-type
+
+        .input__numbers button { background-color: $color-orange; }
+
+    }//&--orange
+
+    &--green {
+
+        .input__score-type {
+
+            button {
+                background-color: transparent;
+                border-color: $color-green;
+
+                &.active { background-color: $color-green; }
+            }//button
+
+        }//.input__score-type
+
+        .input__numbers button { background-color: $color-green; }
+
+    }//&--green
+
+    &--red {
+
+        .input__score-type {
+
+            button {
+                background-color: transparent;
+                border-color: $color-red;
+
+                &.active { background-color: $color-red; }
+            }//button
+
+        }//.input__score-type
+
+        .input__numbers button { background-color: $color-red; }
+
+    }//&--red
+
+}//.scoreboard__input
