@@ -1,5 +1,12 @@
 import * as actions from './actions';
 
+export const setAuth = (auth) => {
+    return {
+        type: actions.GAME_AUTH,
+        isAuth: auth
+    }
+}
+
 export const startGame = (options) => {
     const playerBank = [
         {

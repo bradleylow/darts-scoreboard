@@ -12,6 +12,10 @@ class Options extends Component {
         scoreCount: '501'
     }
 
+    componentDidMount () {
+        this.props.setAuth(true);
+    }
+
     updatePlayerListHandler = (e) => {
         let players = parseInt(e.target.value);
 
@@ -26,6 +30,7 @@ class Options extends Component {
 
     startGameHandler = () => {
         this.props.startGame(this.state);
+        this.props.history.push('/scoreboard');
     }
 
     render () {
@@ -105,6 +110,7 @@ class Options extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setAuth: (auth) => dispatch(actions.setAuth(auth)),
         startGame: (options) => dispatch(actions.startGame(options))
     };
 }
