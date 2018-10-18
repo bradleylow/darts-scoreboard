@@ -66,6 +66,8 @@
         &:last-of-type { margin-right: 0; }
     }//.round__score
 
+    .round__score--bust h5 { color: $color-red; }
+
 }// .round__container
 
 .scoreboard__input {

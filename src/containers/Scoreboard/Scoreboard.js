@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Aux from '../../hoc/Aux/Aux';
 
 const SCORE_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 50];
+const REDUCER = (accumulator, currentValue) => accumulator + currentValue;
+
 
 class Scoreboard extends Component {
 
@@ -61,8 +63,7 @@ class Scoreboard extends Component {
             updatedScores.push(score);
         }
 
-        const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        const scoreTotal = updatedScores.reduce(reducer);
+        const scoreTotal = updatedScores.reduce(REDUCER);
 
         updatedRound.total = scoreTotal;
         updatedRound.darts = updatedScores.length;
@@ -94,13 +95,17 @@ class Scoreboard extends Component {
         const player = players[round.player];
 
         // update the player stats
-        const updatedPlayer = {
+        let updatedPlayer = {
             ...players[round.player],
             score: player.score - round.total,
             points: player.points + round.total,
             darts: player.darts + round.darts
         }
         updatedPlayer.ppd = updatedPlayer.points / updatedPlayer.darts;
+
+        if (updatedPlayer.score < 0) {
+            updatedPlayer = player;
+        }
 
         // populate last round with current round
 
@@ -186,16 +191,31 @@ class Scoreboard extends Component {
         let dartScores = null;
 
         if (this.state.currentRound.scores.length > 0) {
-            dartScores = (
-                <Aux>
-                    {this.state.currentRound.scores.map( (score, i) => (
-                        <div key={i} className="round__score">
-                            <h5>{score}</h5>
+            const currentScores = this.state.currentRound.scores;
+            const playerScore = this.state.players[this.state.currentRound.player].score;
+
+            if (currentScores.reduce(REDUCER) > playerScore) {
+                dartScores = (
+                    <div>
+                        <div className="round__score w-full round__score--bust">
+                            <h5>BUST</h5>
                         </div>
-                    ))}
-                </Aux>
-            )
+                    </div>
+                )
+            } else {
+                dartScores = (
+                    <Aux>
+                        {this.state.currentRound.scores.map( (score, i) => (
+                            <div key={i} className="round__score">
+                                <h5>{score}</h5>
+                            </div>
+                        ))}
+                    </Aux>
+                )
+            }
         }
+
+
 
         return (
             <div className="scoreboard-container py-8">
