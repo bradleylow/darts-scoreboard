@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Aux from '../../hoc/Aux/Aux';
 
-const SCORE_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 50];
+const SCORE_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 50, 0];
 const REDUCER = (accumulator, currentValue) => accumulator + currentValue;
 
 
@@ -22,6 +22,7 @@ class Scoreboard extends Component {
             player: 0,
             scores: [],
             total: 0,
+            darts: 0
         },
         lastRound: {
             player: null,
@@ -89,17 +90,22 @@ class Scoreboard extends Component {
     }
 
     nextRoundHandler = () => {
-
         const round = this.state.currentRound;
         const players = this.state.players;
         const player = players[round.player];
+
+        let totalDarts = player.darts;
+
+        if (round.darts > 0) {
+            totalDarts = player.darts + round.darts;
+        }
 
         // update the player stats
         let updatedPlayer = {
             ...players[round.player],
             score: player.score - round.total,
             points: player.points + round.total,
-            darts: player.darts + round.darts
+            darts: totalDarts
         }
         updatedPlayer.ppd = updatedPlayer.points / updatedPlayer.darts;
 
@@ -108,7 +114,6 @@ class Scoreboard extends Component {
         }
 
         // populate last round with current round
-
         const updatedLastRound = {
             ...round
         };
@@ -169,19 +174,22 @@ class Scoreboard extends Component {
 
         if (this.state.scoreMultiplier !== 1 ) {
             scoreNumbers = scoreNumbers.filter( number => {
-                return number !== 25 && number !== 50;
+                return number !== 25 && number !== 50 && number !== 0;
             })
         }
 
         let inputNumbers = (
             <div className="button__wrapper flex flex-wrap -mx-6">
                 {scoreNumbers.map( (number, i) => (
-                    <div key={i} className="input__number w-1/4 px-2 mb-4">
+                    <div
+                        key={i}
+                        className={"input__number " + (number === 0 ? "w-1/2" : "w-1/4") + " px-2 mb-4"}
+                    >
                         <button
                             className="button w-full"
                             value={number}
                             onClick={(e) => this.setScoreHandler(e)}
-                        >{number}</button>
+                        >{number === 0 ? 'Miss' : number}</button>
                     </div>
                 ))}
             </div>
@@ -225,7 +233,7 @@ class Scoreboard extends Component {
                     </div>
                     <div className="scoreboard__player text-center mb-8">
                         <h1 className={'scoreboard__score scoreboard__score--' + currentPlayer.color}>{currentPlayer.score}</h1>
-                        <p>PPD : {currentPlayer.ppd}</p>
+                        <p>PPD : {currentPlayer.ppd.toFixed(2)}</p>
                     </div>
                     {opponentScores}
                 </div>
