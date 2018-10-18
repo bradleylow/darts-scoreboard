@@ -65,6 +65,7 @@ class Scoreboard extends Component {
         const scoreTotal = updatedScores.reduce(reducer);
 
         updatedRound.total = scoreTotal;
+        updatedRound.darts = updatedScores.length;
 
         this.updateRound(updatedRound);
     }
@@ -84,6 +85,48 @@ class Scoreboard extends Component {
             currentRound: updatedRound,
             scoreMultiplier: 1
         });
+    }
+
+    nextRoundHandler = () => {
+
+        const round = this.state.currentRound;
+        const players = this.state.players;
+        const player = players[round.player];
+
+        // update the player stats
+        const updatedPlayer = {
+            ...players[round.player],
+            score: player.score - round.total,
+            points: player.points + round.total,
+            darts: player.darts + round.darts
+        }
+        updatedPlayer.ppd = updatedPlayer.points / updatedPlayer.darts;
+
+        // populate last round with current round
+
+        const updatedLastRound = {
+            ...round
+        };
+
+        //reset current round
+        const nextPlayer = round.player === 3 ? 0 : round.player + 1;
+
+        const nextRound = {
+            player: nextPlayer,
+            scores: [],
+            total: 0
+        }
+
+        const updatedPlayers = [...players];
+        updatedPlayers[round.player] = updatedPlayer;
+
+        this.setState({
+            ...this.state,
+            players: updatedPlayers,
+            currentRound: nextRound,
+            lastRound: updatedLastRound
+        });
+
     }
 
     render () {
@@ -201,7 +244,10 @@ class Scoreboard extends Component {
                                 <button className="button button--red w-full">Back</button>
                             </div>
                             <div className="input__action w-1/3 px-2">
-                                <button className="button button--green w-full">Next</button>
+                                <button
+                                    className="button button--green w-full"
+                                    onClick={this.nextRoundHandler}
+                                >Next</button>
                             </div>
                         </div>
                     </div>
