@@ -389,6 +389,9 @@ button:focus {
   .scoreboard__input .input__score-type button:last-of-type {
     margin-right: 0; }
 
+.scoreboard__input .input__numbers {
+  min-height: 276px; }
+
 .scoreboard__input--blue .input__score-type button {
   background-color: transparent;
   border-color: #15A3FF; }
