@@ -38,12 +38,12 @@ class Scoreboard extends Component {
     //     }
     // }
 
-    setDoubleInputHandler = () => {
-        this.setState({ scoreMultiplier: 2 });
+    toggleDoubleInputHandler = () => {
+        this.setState({ scoreMultiplier: this.state.scoreMultiplier !== 2 ? 2 : 1 });
     }
 
-    setTripleInputHandler = () => {
-        this.setState({ scoreMultiplier: 3 });
+    toggleTripleInputHandler = () => {
+        this.setState({ scoreMultiplier: this.state.scoreMultiplier !== 3 ? 3 : 1 });
     }
 
     setScoreHandler = (e) => {
@@ -93,12 +93,15 @@ class Scoreboard extends Component {
         //         <Redirect to="/" />
         //     );
         // }
+
+        // Set current player to display scores
         let currentPlayer = this.state.players[this.state.currentRound.player];
 
+        // Filtering out current player to display to display scores of other players
         let opponentScores = null;
 
         if (this.state.players.length > 0) {
-            let opponents = this.state.players.filter( (player) => {
+            let opponents = this.state.players.filter( player => {
                 return player.id !== currentPlayer.id;
             });
 
@@ -113,6 +116,30 @@ class Scoreboard extends Component {
             )
         }
 
+        // Setting possible number inputs based on score multiplier
+        let scoreNumbers = [...SCORE_NUMBERS];
+
+        if (this.state.scoreMultiplier !== 1 ) {
+            scoreNumbers = scoreNumbers.filter( number => {
+                return number !== 25 && number !== 50;
+            })
+        }
+
+        let inputNumbers = (
+            <div className="button__wrapper flex flex-wrap -mx-6">
+                {scoreNumbers.map( (number, i) => (
+                    <div key={i} className="input__number w-1/4 px-2 mb-4">
+                        <button
+                            className="button w-full"
+                            value={number}
+                            onClick={(e) => this.setScoreHandler(e)}
+                        >{number}</button>
+                    </div>
+                ))}
+            </div>
+        )
+
+        // Displays scores of individual darts for current round
         let dartScores = null;
 
         if (this.state.currentRound.scores.length > 0) {
@@ -143,25 +170,15 @@ class Scoreboard extends Component {
                     <div className="input__score-type flex flex-start mb-4">
                         <button
                             className={this.state.scoreMultiplier === 2 ? 'button active' : 'button'}
-                            onClick={this.setDoubleInputHandler}
+                            onClick={this.toggleDoubleInputHandler}
                         >Double</button>
                         <button
                             className={this.state.scoreMultiplier === 3 ? 'button active' : 'button'}
-                            onClick={this.setTripleInputHandler}
+                            onClick={this.toggleTripleInputHandler}
                         >Triple</button>
                     </div>
                     <div className="input__numbers px-4 mb-8">
-                        <div className="button__wrapper flex flex-wrap -mx-6">
-                            {SCORE_NUMBERS.map( (number, i) => (
-                                <div key={i} className="input__number w-1/4 px-2 mb-4">
-                                    <button
-                                        className="button w-full"
-                                        value={number}
-                                        onClick={(e) => this.setScoreHandler(e)}
-                                    >{number}</button>
-                                </div>
-                            ))}
-                        </div>
+                        {inputNumbers}
                     </div>
                     <div className="round__container px-12 mb-8">
                         <div className="round__scores flex justify-center mb-8">
