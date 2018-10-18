@@ -11,21 +11,21 @@ class Scoreboard extends Component {
     // TODO Remove after dev
     state = {
         players: [
-            {id: 0, name: "Player 1", color: "blue", score: 501, ppd: 0},
-            {id: 1, name: "Player 2", color: "orange", score: 501, ppd: 0},
-            {id: 2, name: "Player 3", color: "green", score: 501, ppd: 0},
-            {id: 3, name: "Player 4", color: "red", score: 501, ppd: 0}
+            {id: 0, name: "Player 1", color: "blue", score: 501, ppd: 0, points: 0, darts: 0},
+            {id: 1, name: "Player 2", color: "orange", score: 501, ppd: 0, points: 0, darts: 0},
+            {id: 2, name: "Player 3", color: "green", score: 501, ppd: 0, points: 0, darts: 0},
+            {id: 3, name: "Player 4", color: "red", score: 501, ppd: 0, points: 0, darts: 0}
         ],
         currentRound: {
             player: 0,
             scores: [],
             total: 0,
-            scoreType: 1,
         },
         lastRound: {
             player: null,
             total: 0
-        }
+        },
+        scoreMultiplier: 1
     }
 
     // state = {
@@ -38,8 +38,52 @@ class Scoreboard extends Component {
     //     }
     // }
 
-    componentDidMount () {
-        // console.log(this.state);
+    setDoubleInputHandler = () => {
+        this.setState({ scoreMultiplier: 2 });
+    }
+
+    setTripleInputHandler = () => {
+        this.setState({ scoreMultiplier: 3 });
+    }
+
+    setScoreHandler = (e) => {
+        let value = e.target.value,
+            multiplier = this.state.scoreMultiplier,
+            score = value * multiplier;
+
+        const updatedRound = {
+            ...this.state.currentRound
+        };
+
+        let updatedScores = updatedRound.scores;
+
+        if (updatedRound.scores.length < 3) {
+            updatedScores.push(score);
+        }
+
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        const scoreTotal = updatedScores.reduce(reducer);
+
+        updatedRound.total = scoreTotal;
+
+        this.updateRound(updatedRound);
+    }
+
+    clearRoundHandler = () => {
+        const updatedRound = {
+            ...this.state.currentRound,
+            scores: [],
+            total: 0
+        }
+
+        this.updateRound(updatedRound);
+    }
+
+    updateRound = (updatedRound) => {
+        this.setState({
+            currentRound: updatedRound,
+            scoreMultiplier: 1
+        });
     }
 
     render () {
@@ -97,14 +141,24 @@ class Scoreboard extends Component {
                 </div>
                 <div className={'scoreboard__input scoreboard__input--' + currentPlayer.color}>
                     <div className="input__score-type flex flex-start mb-4">
-                        <button className={this.state.currentRound.scoreType === 2 ? 'button active' : 'button'}>Double</button>
-                        <button className={this.state.currentRound.scoreType === 3 ? 'button active' : 'button'}>Triple</button>
+                        <button
+                            className={this.state.scoreMultiplier === 2 ? 'button active' : 'button'}
+                            onClick={this.setDoubleInputHandler}
+                        >Double</button>
+                        <button
+                            className={this.state.scoreMultiplier === 3 ? 'button active' : 'button'}
+                            onClick={this.setTripleInputHandler}
+                        >Triple</button>
                     </div>
                     <div className="input__numbers px-4 mb-8">
                         <div className="button__wrapper flex flex-wrap -mx-6">
                             {SCORE_NUMBERS.map( (number, i) => (
                                 <div key={i} className="input__number w-1/4 px-2 mb-4">
-                                    <button className="button w-full" value={number}>{number}</button>
+                                    <button
+                                        className="button w-full"
+                                        value={number}
+                                        onClick={(e) => this.setScoreHandler(e)}
+                                    >{number}</button>
                                 </div>
                             ))}
                         </div>
@@ -121,7 +175,10 @@ class Scoreboard extends Component {
                     <div className="input__actions px-4">
                         <div className="button__wrapper flex flex-wrap -mx-6">
                             <div className="input__action w-1/3 px-2">
-                                <button className="button button--orange w-full">Clear</button>
+                                <button
+                                    className="button button--orange w-full"
+                                    onClick={this.clearRoundHandler}
+                                >Clear</button>
                             </div>
                             <div className="input__action w-1/3 px-2">
                                 <button className="button button--red w-full">Back</button>
