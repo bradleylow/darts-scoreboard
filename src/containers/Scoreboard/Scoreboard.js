@@ -273,6 +273,19 @@ class Scoreboard extends Component {
             )
         }
 
+        let nextButton = null;
+
+        if (this.state.currentRound.scores.length === 3) {
+            nextButton = (
+                <div className="input__action w-1/3 px-2">
+                    <button
+                        className="button button--green w-full"
+                        onClick={this.nextRoundHandler}
+                    >Next</button>
+                </div>
+            )
+        }
+
         return (
             <div className="scoreboard-container py-8">
                 <div className="scoreboard__display relative pt-4 mb-12">
@@ -309,7 +322,7 @@ class Scoreboard extends Component {
                         </div>
                     </div>
                     <div className="input__actions px-4">
-                        <div className="button__wrapper flex flex-wrap justify-between -mx-6">
+                        <div className="button__wrapper flex flex-wrap -mx-6">
                             <div className="input__action w-1/3 px-2">
                                 <button
                                     className="button button--orange w-full"
@@ -317,12 +330,7 @@ class Scoreboard extends Component {
                                 >Clear</button>
                             </div>
                             {undoButton}
-                            <div className="input__action w-1/3 px-2">
-                                <button
-                                    className="button button--green w-full"
-                                    onClick={this.nextRoundHandler}
-                                >Next</button>
-                            </div>
+                            {nextButton}
                         </div>
                     </div>
                 </div>
