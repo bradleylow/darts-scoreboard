@@ -1,5 +1,6 @@
 {
   "name": "darts-scoreboard",
+  "homepage": "http://darts.bradleylow.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
