@@ -24,7 +24,7 @@ const startGame = (state, action) => {
 const endGame = (state, action) => {
     return updateObject(state, {
         players: action.players,
-        winner: action.winningPlayer
+        winner: action.winner
     });
 }
 

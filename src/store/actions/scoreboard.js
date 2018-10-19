@@ -52,6 +52,10 @@ export const startGame = (options) => {
 }
 
 export const endGame = (players, winningPlayer) => {
+
+    console.log(players);
+    console.log(winningPlayer);
+    
     return {
         type: actions.GAME_END,
         players: players,
