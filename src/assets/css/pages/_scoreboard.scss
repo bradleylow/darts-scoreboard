@@ -1,3 +1,28 @@
+.scoreboard__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+
+    .confirm-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90%;
+        max-width: 550px;
+        padding: 30px;
+        text-align: center;
+        background-color: $color-blue;
+        @include translate(-50%, -50%);
+
+
+    }//.confirm-container
+
+}//.scoreboard__overlay
+
 .scoreboard-container {
     width: 100%;
 
@@ -11,9 +36,12 @@
 }
 
 .score-to p ,
-.round-number p{
+.round-number p,
+.reset-game p{
     @include font-size(1.4);
 }
+
+.reset-game p { text-decoration: underline; }
 
 .scoreboard__player {
 

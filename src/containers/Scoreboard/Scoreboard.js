@@ -27,7 +27,8 @@ class Scoreboard extends Component {
             darts: 0
         },
         roundCount: this.props.roundCount,
-        scoreMultiplier: 1
+        scoreMultiplier: 1,
+        confirmReset: false
     }
 
     toggleDoubleInputHandler = () => {
@@ -171,6 +172,18 @@ class Scoreboard extends Component {
         }
     }
 
+    resetGameHandler = () => {
+        this.setState({ confirmReset: true })
+    }
+
+    dismissConfirmHandler = () => {
+        this.setState({ confirmReset: false })
+    }
+
+    resetGame = () => {
+        this.props.resetGame();
+    }
+
     endGame (players, winningPlayer, roundCount) {
         this.props.endGame(players, winningPlayer, roundCount);
         this.props.history.push('/results');
@@ -312,50 +325,81 @@ class Scoreboard extends Component {
             }
         }
 
+        let confirmReset = null;
+
+        if (this.state.confirmReset) {
+            confirmReset = (
+                <div className="scoreboard__overlay">
+                    <div className="confirm-container">
+                        <h4>All scores will be lost.</h4>
+                        <div className="button-wrapper mt-12">
+                            <button
+                                className="button button--red mx-4"
+                                onClick={this.resetGame}
+                            >Reset</button>
+                            <button
+                                className="button button--green mx-4"
+                                onClick={this.dismissConfirmHandler}
+                            >Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         return (
-            <div className="scoreboard-container py-8">
-                <div className="scoreboard__display relative pt-4 mb-12">
-                    <div className="score-to absolute pin-t pin-l opacity-50">
-                        <p>{this.props.scoreCount} Game  -  Round {this.state.roundCount}</p>
+            <Aux>
+                {confirmReset}
+                <div className="scoreboard-container py-8">
+                    <div className="scoreboard__display relative pt-4 mb-12">
+                        <div className="score-to absolute pin-t pin-l opacity-50">
+                            <p>{this.props.scoreCount} Game  -  Round {this.state.roundCount}</p>
+                        </div>
+                        <div
+                            className="reset-game absolute pin-t pin-r opacity-50"
+                            onClick={this.resetGameHandler}
+                        >
+                            <p>Reset Game</p>
+                        </div>
+                        <div className="scoreboard__player text-center mb-8">
+                            <h1 className={'scoreboard__score scoreboard__score--' + currentPlayer.color}>{currentPlayer.score - this.state.currentRound.total}</h1>
+                            <p>PPD : {currentPlayer.ppd.toFixed(2)}</p>
+                        </div>
+                        {opponentScores}
                     </div>
-                    <div className="scoreboard__player text-center mb-8">
-                        <h1 className={'scoreboard__score scoreboard__score--' + currentPlayer.color}>{currentPlayer.score - this.state.currentRound.total}</h1>
-                        <p>PPD : {currentPlayer.ppd.toFixed(2)}</p>
+                    <div className={'scoreboard__input scoreboard__input--' + currentPlayer.color}>
+                        <div className="input__score-type flex flex-start mb-4">
+                            <button
+                                className={this.state.scoreMultiplier === 2 ? 'button active' : 'button'}
+                                onClick={this.toggleDoubleInputHandler}
+                            >Double</button>
+                            <button
+                                className={this.state.scoreMultiplier === 3 ? 'button active' : 'button'}
+                                onClick={this.toggleTripleInputHandler}
+                            >Triple</button>
+                        </div>
+                        <div className="input__numbers px-4 mb-8">
+                            {inputNumbers}
+                        </div>
+                        <div className="round__container px-12 mb-8">
+                            <div className="round__scores flex justify-center mb-8">
+                                {dartScores}
+                            </div>
+                            <div className="round__total flex justify-center items-center">
+                                <h5 className="opacity-50 mr-4">Round Score:</h5>
+                                <h4>{this.state.currentRound.total}</h4>
+                            </div>
+                        </div>
+                        <div className="input__actions relative px-4">
+                            <div className="button__wrapper clearfix -mx-6">
+                                {clearButton}
+                                {undoButton}
+                                {nextButton}
+                            </div>
+                        </div>
                     </div>
-                    {opponentScores}
                 </div>
-                <div className={'scoreboard__input scoreboard__input--' + currentPlayer.color}>
-                    <div className="input__score-type flex flex-start mb-4">
-                        <button
-                            className={this.state.scoreMultiplier === 2 ? 'button active' : 'button'}
-                            onClick={this.toggleDoubleInputHandler}
-                        >Double</button>
-                        <button
-                            className={this.state.scoreMultiplier === 3 ? 'button active' : 'button'}
-                            onClick={this.toggleTripleInputHandler}
-                        >Triple</button>
-                    </div>
-                    <div className="input__numbers px-4 mb-8">
-                        {inputNumbers}
-                    </div>
-                    <div className="round__container px-12 mb-8">
-                        <div className="round__scores flex justify-center mb-8">
-                            {dartScores}
-                        </div>
-                        <div className="round__total flex justify-center items-center">
-                            <h5 className="opacity-50 mr-4">Round Score:</h5>
-                            <h4>{this.state.currentRound.total}</h4>
-                        </div>
-                    </div>
-                    <div className="input__actions relative px-4">
-                        <div className="button__wrapper clearfix -mx-6">
-                            {clearButton}
-                            {undoButton}
-                            {nextButton}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </Aux>
         );
     }
 
@@ -372,6 +416,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        resetGame: () => dispatch(actions.resetGame()),
         endGame: (players, winningPlayer, roundCount) => dispatch(actions.endGame(players, winningPlayer, roundCount))
     };
 }
