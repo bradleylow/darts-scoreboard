@@ -4,6 +4,7 @@ import { updateObject } from '../utility';
 const initialState = {
     players: [],
     scoreCount: null,
+    roundCount: 1,
     isAuth: false,
     winner: null
 }
@@ -28,7 +29,8 @@ const resetGame = (state, action) => {
 const endGame = (state, action) => {
     return updateObject(state, {
         players: action.players,
-        winner: action.winner
+        winner: action.winner,
+        roundCount: action.roundCount
     });
 }
 

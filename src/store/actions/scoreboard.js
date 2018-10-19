@@ -57,10 +57,11 @@ export const resetGame = (players, winningPlayer) => {
     }
 }
 
-export const endGame = (players, winningPlayer) => {
+export const endGame = (players, winningPlayer, roundCount) => {
     return {
         type: actions.GAME_END,
         players: players,
-        winner: winningPlayer
+        winner: winningPlayer,
+        roundCount: roundCount
     }
 }
