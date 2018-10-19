@@ -488,6 +488,9 @@ button:focus {
 .scoreboard__input--red .input__numbers button {
   background-color: #FF4B36; }
 
+.input__actions {
+  min-height: 36px; }
+
 .input__action--undo {
   position: absolute;
   top: 0;
