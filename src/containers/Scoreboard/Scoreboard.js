@@ -357,7 +357,7 @@ class Scoreboard extends Component {
 
 }
 
-const mapsStateToProps = state => {
+const mapStateToProps = state => {
     return {
         players: state.scoreboard.players,
         scoreCount: state.scoreboard.scoreCount,
@@ -371,4 +371,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(mapsStateToProps, mapDispatchToProps)(Scoreboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Scoreboard);
