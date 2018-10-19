@@ -50,3 +50,11 @@ export const startGame = (options) => {
         scoreCount: options.scoreCount
     }
 }
+
+export const endGame = (players, winningPlayer) => {
+    return {
+        type: actions.GAME_END,
+        players: players,
+        winner: winningPlayer
+    }
+}

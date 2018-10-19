@@ -1,4 +1,5 @@
 export {
     setAuth,
-    startGame
+    startGame,
+    endGame
 } from './scoreboard';

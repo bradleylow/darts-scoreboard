@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import Aux from '../../hoc/Aux/Aux';
 
+import * as actions from '../../store/actions/index';
+
 const SCORE_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 50, 0];
 const REDUCER = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -160,9 +162,14 @@ class Scoreboard extends Component {
         });
 
         if (updatedPlayer.score === 0) {
-            this.endGame();
+            this.endGame(updatedPlayers, updatedPlayer);
         }
 
+    }
+
+    endGame (players, winningPlayer) {
+        this.props.endGame(players, winningPlayer);
+        this.props.history.push('/results');
     }
 
     render () {
@@ -358,4 +365,10 @@ const mapsStateToProps = state => {
     };
 }
 
-export default connect(mapsStateToProps)(Scoreboard);
+const mapDispatchToProps = dispatch => {
+    return {
+        endGame: (players, winningPlayer) => dispatch(actions.endGame(players, winningPlayer))
+    };
+}
+
+export default connect(mapsStateToProps, mapDispatchToProps)(Scoreboard);
