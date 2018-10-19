@@ -10,14 +10,8 @@ const REDUCER = (accumulator, currentValue) => accumulator + currentValue;
 
 class Scoreboard extends Component {
 
-    // TODO Remove after dev
     state = {
-        players: [
-            {id: 0, name: "Player 1", color: "blue", score: 501, ppd: 0, points: 0, darts: 0},
-            {id: 1, name: "Player 2", color: "orange", score: 501, ppd: 0, points: 0, darts: 0},
-            {id: 2, name: "Player 3", color: "green", score: 501, ppd: 0, points: 0, darts: 0},
-            {id: 3, name: "Player 4", color: "red", score: 501, ppd: 0, points: 0, darts: 0}
-        ],
+        players: this.props.players,
         currentRound: {
             player: 0,
             scores: [],
@@ -165,15 +159,19 @@ class Scoreboard extends Component {
             lastRound: updatedLastRound
         });
 
+        if (updatedPlayer.score === 0) {
+            this.endGame();
+        }
+
     }
 
     render () {
         // Check if user is from Options page
-        // if (!this.props.isAuth) {
-        //     return (
-        //         <Redirect to="/" />
-        //     );
-        // }
+        if (!this.props.isAuth) {
+            return (
+                <Redirect to="/" />
+            );
+        }
 
         // Set current player to display scores
         let currentPlayer = this.state.players[this.state.currentRound.player];
