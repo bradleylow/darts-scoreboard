@@ -33,16 +33,6 @@ class Scoreboard extends Component {
         scoreMultiplier: 1
     }
 
-    // state = {
-    //     players: this.props.players,
-    //     currentPlayer: 0,
-    //     currentRound: {
-    //         scores: [],
-    //         total: 0,
-    //         scoreType: 1,
-    //     }
-    // }
-
     toggleDoubleInputHandler = () => {
         this.setState({ scoreMultiplier: this.state.scoreMultiplier !== 2 ? 2 : 1 });
     }
@@ -156,7 +146,8 @@ class Scoreboard extends Component {
         };
 
         //reset current round
-        const nextPlayer = round.player === 3 ? 0 : round.player + 1;
+        const numberPlayers = this.state.players.length;
+        const nextPlayer = round.player === (numberPlayers - 1) ? 0 : round.player + 1;
 
         const nextRound = {
             player: nextPlayer,
@@ -243,7 +234,15 @@ class Scoreboard extends Component {
                 dartScores = (
                     <div>
                         <div className="round__score w-full round__score--bust">
-                            <h5>BUST</h5>
+                            <h5>Bust</h5>
+                        </div>
+                    </div>
+                )
+            } else if (currentPlayer.score - this.state.currentRound.total === 0) {
+                dartScores = (
+                    <div>
+                        <div className="round__score w-full round__score--winner">
+                            <h5>Winner</h5>
                         </div>
                     </div>
                 )
@@ -288,15 +287,20 @@ class Scoreboard extends Component {
 
         let nextButton = null;
 
-        if (this.state.currentRound.scores.length === 3) {
-            nextButton = (
-                <div className="input__action w-1/3 px-2">
-                    <button
-                        className="button button--green w-full"
-                        onClick={this.nextRoundHandler}
-                    >Next</button>
-                </div>
-            )
+        if (this.state.currentRound.scores.length > 0) {
+            if (this.state.currentRound.scores.length === 3
+                || this.state.currentRound.scores.reduce(REDUCER) > this.state.players[this.state.currentRound.player].score
+                || currentPlayer.score - this.state.currentRound.total === 0
+            ) {
+                nextButton = (
+                    <div className="input__action w-1/3 px-2">
+                        <button
+                            className="button button--green w-full"
+                            onClick={this.nextRoundHandler}
+                        >Next</button>
+                    </div>
+                )
+            }
         }
 
         return (
@@ -306,7 +310,7 @@ class Scoreboard extends Component {
                         <p>{this.props.scoreCount} Game</p>
                     </div>
                     <div className="scoreboard__player text-center mb-8">
-                        <h1 className={'scoreboard__score scoreboard__score--' + currentPlayer.color}>{currentPlayer.score}</h1>
+                        <h1 className={'scoreboard__score scoreboard__score--' + currentPlayer.color}>{currentPlayer.score - this.state.currentRound.total}</h1>
                         <p>PPD : {currentPlayer.ppd.toFixed(2)}</p>
                     </div>
                     {opponentScores}

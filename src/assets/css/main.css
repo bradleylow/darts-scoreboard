@@ -375,8 +375,13 @@ button:focus {
   .round__container .round__score:last-of-type {
     margin-right: 0; }
 
+.round__container .round__score--winner h5 {
+  color: #3CCC05;
+  text-transform: uppercase; }
+
 .round__container .round__score--bust h5 {
-  color: #FF4B36; }
+  color: #FF4B36;
+  text-transform: uppercase; }
 
 .scoreboard__input button {
   min-width: 0;

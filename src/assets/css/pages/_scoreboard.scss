@@ -66,7 +66,15 @@
         &:last-of-type { margin-right: 0; }
     }//.round__score
 
-    .round__score--bust h5 { color: $color-red; }
+    .round__score--winner h5 {
+        color: $color-green;
+        text-transform: uppercase;
+    }//.round__score--bust h5
+
+    .round__score--bust h5 {
+        color: $color-red;
+        text-transform: uppercase;
+    }//.round__score--bust h5
 
 }// .round__container
 
