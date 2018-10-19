@@ -312,6 +312,30 @@ button:focus {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
+.result__winner--blue {
+  background-color: #15A3FF; }
+
+.result__winner--orange {
+  background-color: #ffae00; }
+
+.result__winner--green {
+  background-color: #3CCC05; }
+
+.result__winner--red {
+  background-color: #FF4B36; }
+
+.result__player--blue {
+  background-color: #15A3FF; }
+
+.result__player--orange {
+  background-color: #ffae00; }
+
+.result__player--green {
+  background-color: #3CCC05; }
+
+.result__player--red {
+  background-color: #FF4B36; }
+
 .scoreboard-container {
   width: 100%; }
   @media only screen and (min-width: 576px) {
