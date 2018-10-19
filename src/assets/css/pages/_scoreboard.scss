@@ -170,3 +170,10 @@
     }//&--red
 
 }//.scoreboard__input
+
+.input__action--undo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    @include translate(-50%, 0);
+}//.input__actions .button--undo

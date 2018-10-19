@@ -263,7 +263,7 @@ class Scoreboard extends Component {
 
         if (this.state.currentRound.scores.length > 0) {
             clearButton = (
-                <div className="input__action w-1/3 px-2">
+                <div className="input__action float-left w-1/3 px-2">
                     <button
                         className="button button--orange w-full"
                         onClick={this.clearRoundHandler}
@@ -276,7 +276,7 @@ class Scoreboard extends Component {
 
         if (this.state.lastRound.player !== null) {
             undoButton = (
-                <div className="input__action w-1/3 px-2">
+                <div className="input__action input__action--undo w-1/3 px-2">
                     <button
                         className="button button--red w-full"
                         onClick={this.undoRoundHandler}
@@ -293,7 +293,7 @@ class Scoreboard extends Component {
                 || currentPlayer.score - this.state.currentRound.total === 0
             ) {
                 nextButton = (
-                    <div className="input__action w-1/3 px-2">
+                    <div className="input__action float-right w-1/3 px-2">
                         <button
                             className="button button--green w-full"
                             onClick={this.nextRoundHandler}
@@ -338,8 +338,8 @@ class Scoreboard extends Component {
                             <h4>{this.state.currentRound.total}</h4>
                         </div>
                     </div>
-                    <div className="input__actions px-4">
-                        <div className="button__wrapper flex flex-wrap -mx-6">
+                    <div className="input__actions relative px-4">
+                        <div className="button__wrapper clearfix -mx-6">
                             {clearButton}
                             {undoButton}
                             {nextButton}
