@@ -19,12 +19,15 @@ class Result extends Component {
         }
 
         return (
-            <div className="result-container text-center">
-                <div className="result__display relative pt-12 mb-16">
+            <div className="result-container py-8 text-center">
+                <div className="result__display relative pt-4 mb-16">
                     <div className="score-to absolute pin-t pin-l opacity-50">
                         <p>{this.props.scoreCount} Game</p>
                     </div>
-                    <div className={"result__winner result__winner--" + this.props.winner.color + " py-8"}>
+                    <div className="round-number absolute pin-t pin-r opacity-50">
+                        <p>{this.props.roundCount} Rounds</p>
+                    </div>
+                    <div className={"result__winner result__winner--" + this.props.winner.color + " py-8 mt-6"}>
                         <h5 className="mb-4 uppercase">Winner</h5>
                         <h1 className="mt-0 mb-8">{this.props.winner.name}</h1>
                         <p>PPD : {this.props.winner.ppd.toFixed(2)}</p>
@@ -62,6 +65,7 @@ const mapStateToProps = state => {
         players: state.scoreboard.players,
         winner: state.scoreboard.winner,
         scoreCount: state.scoreboard.scoreCount,
+        roundCount: state.scoreboard.roundCount,
         isAuth: state.scoreboard.isAuth
     };
 }
