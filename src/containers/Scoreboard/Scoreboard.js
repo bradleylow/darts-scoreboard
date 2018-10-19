@@ -351,7 +351,7 @@ class Scoreboard extends Component {
             <Aux>
                 {confirmReset}
                 <div className="scoreboard-container py-8">
-                    <div className="scoreboard__display relative pt-4 mb-12">
+                    <div className="scoreboard__display relative pt-4 mb-8">
                         <div className="score-to absolute pin-t pin-l opacity-50">
                             <p>{this.props.scoreCount} Game  -  Round {this.state.roundCount}</p>
                         </div>
