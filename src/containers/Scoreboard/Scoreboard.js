@@ -260,6 +260,19 @@ class Scoreboard extends Component {
             }
         }
 
+        let clearButton = null;
+
+        if (this.state.currentRound.scores.length > 0) {
+            clearButton = (
+                <div className="input__action w-1/3 px-2">
+                    <button
+                        className="button button--orange w-full"
+                        onClick={this.clearRoundHandler}
+                    >Clear</button>
+                </div>
+            )
+        }
+
         let undoButton = null;
 
         if (this.state.lastRound.player !== null) {
@@ -323,12 +336,7 @@ class Scoreboard extends Component {
                     </div>
                     <div className="input__actions px-4">
                         <div className="button__wrapper flex flex-wrap -mx-6">
-                            <div className="input__action w-1/3 px-2">
-                                <button
-                                    className="button button--orange w-full"
-                                    onClick={this.clearRoundHandler}
-                                >Clear</button>
-                            </div>
+                            {clearButton}
                             {undoButton}
                             {nextButton}
                         </div>
