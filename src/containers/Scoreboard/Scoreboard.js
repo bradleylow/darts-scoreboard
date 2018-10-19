@@ -156,7 +156,13 @@ class Scoreboard extends Component {
         const updatedPlayers = [...players];
         updatedPlayers[round.player] = updatedPlayer;
 
-        const updatedRoundCount = currentRound + 1;
+        let updatedRoundCount = null
+
+        if (updatedPlayer.score === 0) {
+            updatedRoundCount = currentRound;
+        } else {
+            updatedRoundCount = currentRound + 1;
+        }
 
         this.setState({
             ...this.state,
