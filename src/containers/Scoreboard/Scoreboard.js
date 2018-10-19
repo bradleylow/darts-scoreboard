@@ -26,7 +26,9 @@ class Scoreboard extends Component {
         },
         lastRound: {
             player: null,
-            total: 0
+            scores: [],
+            total: 0,
+            darts: 0
         },
         scoreMultiplier: 1
     }
@@ -89,6 +91,41 @@ class Scoreboard extends Component {
         });
     }
 
+    undoRoundHandler = () => {
+        const lastRound = this.state.lastRound;
+        const players = this.state.players;
+        const lastPlayer = players[lastRound.player];
+
+        let updatedPlayer = {
+            ...lastPlayer,
+            score: lastPlayer.score + lastRound.total,
+            points: lastPlayer.points - lastRound.total,
+            darts: lastPlayer.darts - lastRound.darts
+        }
+
+        if (updatedPlayer.darts === 0) {
+            updatedPlayer.ppd = 0;
+        } else {
+            updatedPlayer.ppd = updatedPlayer.points / updatedPlayer.darts;
+        }
+
+        const updatedPlayers = [...players];
+        updatedPlayers[lastRound.player] = updatedPlayer;
+
+        this.setState({
+            ...this.state,
+            players: updatedPlayers,
+            currentRound: lastRound,
+            lastRound: {
+                player: null,
+                scores: [],
+                total: 0,
+                darts: 0
+            }
+        });
+
+    }
+
     nextRoundHandler = () => {
         const round = this.state.currentRound;
         const players = this.state.players;
@@ -102,7 +139,7 @@ class Scoreboard extends Component {
 
         // update the player stats
         let updatedPlayer = {
-            ...players[round.player],
+            ...player,
             score: player.score - round.total,
             points: player.points + round.total,
             darts: totalDarts
@@ -223,7 +260,18 @@ class Scoreboard extends Component {
             }
         }
 
+        let undoButton = null;
 
+        if (this.state.lastRound.player !== null) {
+            undoButton = (
+                <div className="input__action w-1/3 px-2">
+                    <button
+                        className="button button--red w-full"
+                        onClick={this.undoRoundHandler}
+                    >Undo</button>
+                </div>
+            )
+        }
 
         return (
             <div className="scoreboard-container py-8">
@@ -261,16 +309,14 @@ class Scoreboard extends Component {
                         </div>
                     </div>
                     <div className="input__actions px-4">
-                        <div className="button__wrapper flex flex-wrap -mx-6">
+                        <div className="button__wrapper flex flex-wrap justify-between -mx-6">
                             <div className="input__action w-1/3 px-2">
                                 <button
                                     className="button button--orange w-full"
                                     onClick={this.clearRoundHandler}
                                 >Clear</button>
                             </div>
-                            <div className="input__action w-1/3 px-2">
-                                <button className="button button--red w-full">Back</button>
-                            </div>
+                            {undoButton}
                             <div className="input__action w-1/3 px-2">
                                 <button
                                     className="button button--green w-full"
