@@ -26,6 +26,7 @@ class Scoreboard extends Component {
             total: 0,
             darts: 0
         },
+        roundCount: this.props.roundCount,
         scoreMultiplier: 1
     }
 
@@ -114,6 +115,7 @@ class Scoreboard extends Component {
 
     nextRoundHandler = () => {
         const round = this.state.currentRound;
+        const currentRound = this.state.roundCount;
         const players = this.state.players;
         const player = players[round.player];
 
@@ -154,21 +156,24 @@ class Scoreboard extends Component {
         const updatedPlayers = [...players];
         updatedPlayers[round.player] = updatedPlayer;
 
+        const updatedRoundCount = currentRound + 1;
+
         this.setState({
             ...this.state,
             players: updatedPlayers,
             currentRound: nextRound,
-            lastRound: updatedLastRound
+            lastRound: updatedLastRound,
+            roundCount: updatedRoundCount
         });
 
         if (updatedPlayer.score === 0) {
-            this.endGame(updatedPlayers, updatedPlayer);
+            this.endGame(updatedPlayers, updatedPlayer, updatedRoundCount);
         }
 
     }
 
-    endGame (players, winningPlayer) {
-        this.props.endGame(players, winningPlayer);
+    endGame (players, winningPlayer, roundCount) {
+        this.props.endGame(players, winningPlayer, roundCount);
         this.props.history.push('/results');
     }
 
@@ -312,7 +317,7 @@ class Scoreboard extends Component {
             <div className="scoreboard-container py-8">
                 <div className="scoreboard__display relative pt-4 mb-12">
                     <div className="score-to absolute pin-t pin-l opacity-50">
-                        <p>{this.props.scoreCount} Game</p>
+                        <p>{this.props.scoreCount} Game  -  Round {this.state.roundCount}</p>
                     </div>
                     <div className="scoreboard__player text-center mb-8">
                         <h1 className={'scoreboard__score scoreboard__score--' + currentPlayer.color}>{currentPlayer.score - this.state.currentRound.total}</h1>
@@ -361,13 +366,14 @@ const mapStateToProps = state => {
     return {
         players: state.scoreboard.players,
         scoreCount: state.scoreboard.scoreCount,
+        roundCount: state.scoreboard.roundCount,
         isAuth: state.scoreboard.isAuth
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        endGame: (players, winningPlayer) => dispatch(actions.endGame(players, winningPlayer))
+        endGame: (players, winningPlayer, roundCount) => dispatch(actions.endGame(players, winningPlayer, roundCount))
     };
 }
 
