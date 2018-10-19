@@ -156,26 +156,19 @@ class Scoreboard extends Component {
         const updatedPlayers = [...players];
         updatedPlayers[round.player] = updatedPlayer;
 
-        let updatedRoundCount = null
-
         if (updatedPlayer.score === 0) {
-            updatedRoundCount = currentRound;
+            this.endGame(updatedPlayers, updatedPlayer, currentRound);
         } else {
-            updatedRoundCount = currentRound + 1;
+            const updatedRoundCount = currentRound + 1;
+
+            this.setState({
+                ...this.state,
+                players: updatedPlayers,
+                currentRound: nextRound,
+                lastRound: updatedLastRound,
+                roundCount: updatedRoundCount
+            });
         }
-
-        this.setState({
-            ...this.state,
-            players: updatedPlayers,
-            currentRound: nextRound,
-            lastRound: updatedLastRound,
-            roundCount: updatedRoundCount
-        });
-
-        if (updatedPlayer.score === 0) {
-            this.endGame(updatedPlayers, updatedPlayer, updatedRoundCount);
-        }
-
     }
 
     endGame (players, winningPlayer, roundCount) {
