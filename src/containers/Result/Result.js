@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
 class Result extends Component {
 
     render () {
-        console.log(this.props.players);
-        console.log(this.props.winner);
+        // Check if user is from Options page
+        if (!this.props.isAuth) {
+            return (
+                <Redirect to="/" />
+            );
+        }
 
         return (
             <div className="result-container py-24 text-center">
@@ -19,7 +24,8 @@ class Result extends Component {
 const mapsStateToProps = state => {
     return {
         players: state.scoreboard.players,
-        winner: state.scoreboard.winner
+        winner: state.scoreboard.winner,
+        isAuth: state.scoreboard.isAuth
     };
 }
 
