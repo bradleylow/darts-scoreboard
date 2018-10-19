@@ -10,7 +10,8 @@
 
 }
 
-.scoreboard__display .score-to p {
+.score-to p ,
+.round-number p{
     @include font-size(1.4);
 }
 
