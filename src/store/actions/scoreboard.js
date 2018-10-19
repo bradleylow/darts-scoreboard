@@ -51,11 +51,13 @@ export const startGame = (options) => {
     }
 }
 
-export const endGame = (players, winningPlayer) => {
+export const resetGame = (players, winningPlayer) => {
+    return {
+        type: actions.GAME_RESET,
+    }
+}
 
-    console.log(players);
-    console.log(winningPlayer);
-    
+export const endGame = (players, winningPlayer) => {
     return {
         type: actions.GAME_END,
         players: players,

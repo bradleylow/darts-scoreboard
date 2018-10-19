@@ -21,6 +21,10 @@ const startGame = (state, action) => {
     });
 }
 
+const resetGame = (state, action) => {
+    return updateObject( state, initialState );
+}
+
 const endGame = (state, action) => {
     return updateObject(state, {
         players: action.players,
@@ -32,6 +36,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actions.GAME_AUTH: return setAuth(state, action);
         case actions.GAME_START: return startGame(state, action);
+        case actions.GAME_RESET: return resetGame(state, action);
         case actions.GAME_END: return endGame(state, action);
         default: return state;
     }
