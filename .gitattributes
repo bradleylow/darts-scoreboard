@@ -1,1 +1,2 @@
-static/css linguist-vendored
+//Ignore css files for GitHubs repo language classification
+src/assets/css linguist-vendored
