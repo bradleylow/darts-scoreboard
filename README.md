@@ -9,9 +9,6 @@ A darts 01 game score keeper. Supports up to 4 players and has options for 301, 
 ## How to Use
 
 ```
-# Clone
-$ git clone https://github.com/bradleylow/simple-shirts.git
-
 # Go to repository
 $ cd darts-scoreboard
 
